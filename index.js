@@ -72,11 +72,20 @@ Plugin.prototype.getHashes = function(compiler) {
 			// will push the new bundle to the array, so the last item will be the correct
 			// chunk
 			// e.g. [ 'styles-bundle.js', 'styles-bundle.css' ]
-			chunkValue = chunkValue.filter(filterDevChunks).pop();
+			chunkValue = chunkValue.filter(filterDevChunks);
+ 			if (!this.options.array) {
+ 			 		chunkValue = chunkValue.pop();
+ 			}
 		}
 
 		if (compiler.options.output.publicPath) {
-			chunkValue = compiler.options.output.publicPath + chunkValue;
+ 			if (!this.options.array) {
+			 		chunkValue = compiler.options.output.publicPath + chunkValue;
+ 			} else {
+			 		chunkValue = chunkValue.map(function(value) {
+ 			 			return compiler.options.output.publicPath + value;
+ 			 		});
+ 			}
 		}
 
 		assets[chunk] = chunkValue;
