@@ -55,6 +55,18 @@ Name for the created json file. Defaults to `webpack-assets.json`
 new SaveHashes({filename: 'assets.json'})
 ```
 
+__array__:
+
+Output an array of entities instead of just the last one.
+
+```js
+new SaveHashes({array: true})
+```
+Result:
+```json
+{"bundle":["/assets/bundle-37025c552376628564bc.js","/assets/bundle-61ba355fa2a8cd3e428971a5b303f06d.css"]}
+```
+
 ### Using this with Rails
 
 I use this with Rails, so it can find my Webpack assets. In my application controller I have:
